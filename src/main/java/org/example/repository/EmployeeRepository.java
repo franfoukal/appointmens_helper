@@ -2,10 +2,8 @@ package org.example.repository;
 
 import org.example.models.Employee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class EmployeeRepository {
     private final Connection connection;
@@ -42,6 +40,30 @@ public class EmployeeRepository {
             System.out.println("Employee saved successfully! \n");
         } catch (SQLException e) {
             System.out.println("Error creating new employee: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<Employee> getAll() {
+        String getAllEmployeesSql = "SELECT * FROM employees";
+
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(getAllEmployeesSql);
+            ResultSet result = stmt.executeQuery();
+            ArrayList<Employee> employeesList = new ArrayList<>();
+
+            while(result.next()){
+                String name = result.getString("name");
+                int percentage = result.getInt("percentage");
+                int id = result.getInt("id");
+
+                Employee employee = new Employee(name, percentage, id);
+                employeesList.add(employee);
+            }
+
+            return employeesList;
+        } catch (SQLException e) {
+            System.out.println("Error fetching all employees: " + e.getMessage());
+            return null;
         }
     }
 }
