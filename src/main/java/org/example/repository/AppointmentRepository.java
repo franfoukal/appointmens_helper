@@ -23,7 +23,7 @@ public class AppointmentRepository {
                 employee_id INT NOT NULL,
                 date DATETIME NOT NULL,
                 client_name VARCHAR(50) NOT NULL,
-                service VARCHAR(50) NOT NULL,
+                service_id INT NOT NULL,
                 payment DOUBLE NOT NULL,
                 FOREIGN KEY (employee_id) REFERENCES employees(id)
                 );
@@ -37,7 +37,7 @@ public class AppointmentRepository {
     }
 
     public void create(Appointment appointment) {
-        String createNewAppointmentSQL = "INSERT INTO appointments (employee_id, date, client_name,service, payment) VALUES (?, ?, ?, ?, ?)";
+        String createNewAppointmentSQL = "INSERT INTO appointments (employee_id, date, client_name,service_id, payment) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stmt = this.connection.prepareStatement(createNewAppointmentSQL);
@@ -45,7 +45,7 @@ public class AppointmentRepository {
             stmt.setInt(1, appointment.getEmployeeId());
             stmt.setDate(2, new java.sql.Date(appointment.getDate().getTime()));
             stmt.setDouble(5, appointment.getPayment());
-            stmt.setString(4, appointment.getService());
+            stmt.setInt(4, appointment.getServiceId());
             stmt.execute();
             System.out.println("Appointment saved successfully! \n");
         } catch (SQLException e) {
