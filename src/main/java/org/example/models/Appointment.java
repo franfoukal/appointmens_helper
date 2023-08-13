@@ -8,24 +8,24 @@ private int id;
 private int employeeId;
 private Date date;
 private String clientName;
-private String service;
+private int serviceId;
 private Double payment;
 
 
-    public Appointment(int id, int employeeId, Date date, String clientName, String service, Double payment) {
+    public Appointment(int id, int employeeId, Date date, String clientName, int serviceIdd, Double payment) {
         this.id = id;
         this.employeeId = employeeId;
         this.date = date;
         this.clientName = clientName;
-        this.service = service;
+        this.serviceId = serviceId;
         this.payment = payment;
     }
 
-    public Appointment(int employeeId, Date date, String clientName, String service, Double payment) {
+    public Appointment(int employeeId, Date date, String clientName, int serviceId, Double payment) {
         this.employeeId = employeeId;
         this.date = date;
         this.clientName = clientName;
-        this.service = service;
+        this.serviceId = serviceId;
         this.payment = payment;
     }
 
@@ -61,12 +61,12 @@ private Double payment;
         this.clientName = clientName;
     }
 
-    public String getService() {
-        return service;
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setService(String service) {
-        this.service = service;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
     public Double getPayment() {
